@@ -8,13 +8,13 @@ public class ResourcePool {
     private final AtomicInteger availableFood;
 
     public ResourcePool(int initialFood) {
-        // Use a fair semaphore to prevent thread starvation
+        //semaphore to prevent thread starvation
         this.foodSemaphore = new Semaphore(initialFood, true);
         this.availableFood = new AtomicInteger(initialFood);
     }
 
     public boolean tryToEat(int cellId, long timeoutMs) throws InterruptedException {
-        // Try to acquire a permit (food) within the timeout
+        //acquire food within the timeout
         boolean acquired = foodSemaphore.tryAcquire(timeoutMs, java.util.concurrent.TimeUnit.MILLISECONDS);
         if (acquired) {
             availableFood.decrementAndGet();
@@ -26,20 +26,20 @@ public class ResourcePool {
 
     public void addFood(int amount) {
         availableFood.addAndGet(amount);
-        foodSemaphore.release(amount); // Release permits so waiting cells can eat
+        foodSemaphore.release(amount);
         System.out.println("Added " + amount + " food. Total: " + availableFood.get());
     }
 
     public void addFoodFromDeadCell(int deadCellId) {
-        // Random food between 1 and 5
+
         int amount = 1 + (int)(Math.random() * 5);
         addFood(amount);
         System.out.println("Cell " + deadCellId + " died and dropped " + amount + " food.");
     }
     
-    // --- NEW METHOD ---
+
     public void clear() {
-        // Drain all permits and reset counter
+
         foodSemaphore.drainPermits();
         availableFood.set(0);
     }
