@@ -11,13 +11,13 @@ public class AsexualCell extends Cell {
     
     @Override
     protected void tryToReproduce() throws InterruptedException {
-        // Simulate "Mitosis" time, scaled by game speed
+
         manager.sleepFor(1000); 
         
-        // Asexual reproduction: One cell splits into two NEW cells
+        //asexual reproduction
         manager.reproduce(this, null);
         
-        // Parent dies (splits apart)
+        //parent dies
         synchronized (this) {
             isAlive = false;
         }
