@@ -28,7 +28,7 @@ public class LMStudioService {
                     Map.of("role", "system", "content", "You are a software simulation logger. Provide a concise 3-sentence summary of the simulation run. Do not output internal thoughts."),
                     Map.of("role", "user", "content", prompt)
             ));
-            requestBody.put("temperature", 0.3); // Lower temperature for more focused answers
+            requestBody.put("temperature", 0.3);
             requestBody.put("max_tokens", 300);
             requestBody.put("stream", false);
 
@@ -54,12 +54,12 @@ public class LMStudioService {
         }
     }
 
-    // FIX: Remove <think> tags from the output
+ 
     private String cleanResponse(String raw) {
         if (raw == null) return "";
-        // Regex to remove <think>...</think> content (dotall mode)
+       
         String cleaned = raw.replaceAll("(?s)<think>.*?</think>", "").trim();
-        // Remove any markdown code blocks if present
+        
         return cleaned.replaceAll("```", "");
     }
 
