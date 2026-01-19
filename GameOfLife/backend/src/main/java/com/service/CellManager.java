@@ -18,7 +18,7 @@ public class CellManager {
     
     // STATS TRACKERS
     private final AtomicInteger totalReproductions = new AtomicInteger(0); // Sexual
-    private final AtomicInteger totalDivisions = new AtomicInteger(0);     // Asexual (NEW)
+    private final AtomicInteger totalDivisions = new AtomicInteger(0);     // Asexual
     
     private final AtomicReference<Double> timeScale = new AtomicReference<>(1.0);
     private boolean isPaused = false;
@@ -74,7 +74,7 @@ public class CellManager {
         return null;
     }
 
-    // --- FIX: SEPARATE COUNTERS ---
+
     public void reproduce(Cell parent1, Cell parent2) {
         if (parent1 instanceof AsexualCell) {
             // Asexual Division
@@ -104,7 +104,7 @@ public class CellManager {
 
     public int getAliveCellsCount() { return (int) cells.stream().filter(Cell::isAlive).count(); }
     
-    // Getters for Controller
+
     public int getTotalReproductions() { return totalReproductions.get(); }
     public int getTotalDivisions() { return totalDivisions.get(); } // NEW GETTER
     
