@@ -233,7 +233,7 @@ public class SimulationController {
         currentGame.setAliveSexualCells(aliveSexual);
         currentGame.setAliveAsexualCells(aliveAsexual);
         
-        // --- FIX: Record both types separately ---
+        
         currentGame.setNrReproductions(manager.getTotalReproductions()); // Sexual
         currentGame.setNrDivisions(manager.getTotalDivisions());         // Asexual
         
